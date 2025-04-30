@@ -13,7 +13,7 @@ const Portfolio = () => {
     {
       id: 1,
       title: "Bloopa, Inc.",
-      description: "Welcome to "The Bloops"—adorable characters who become wild with anger and cute with wholesome traits. We're building an engaging IP through short, humorous social media clips that educate and inspire reflection.",
+      description: "Welcome to 'The Bloops'—adorable characters who become wild with anger and cute with wholesome traits. We're building an engaging IP through short, humorous social media clips that educate and inspire reflection.",
       image: "/lovable-uploads/cfc0945a-5ed5-4768-8626-be59a140b16f.png",
       link: "/portfolio/cofounding/bloopa",
     },
