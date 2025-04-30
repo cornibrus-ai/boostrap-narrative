@@ -1,54 +1,60 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
   
-  const projects = [
+  const filters = ['all', 'Co-Founding', 'Angel Investments'];
+  
+  const coFoundingProjects = [
     {
       id: 1,
-      title: "Spatial Data Explorer",
-      description: "An interactive platform for visualizing and exploring complex geospatial datasets through an intuitive interface.",
-      category: "Web Application",
-      technologies: ["React", "Three.js", "D3.js", "Node.js"],
-      image: "/placeholder.svg",
-      link: "#",
+      title: "Bloopa, Inc.",
+      description: "Welcome to "The Bloops"—adorable characters who become wild with anger and cute with wholesome traits. We're building an engaging IP through short, humorous social media clips that educate and inspire reflection.",
+      image: "/lovable-uploads/cfc0945a-5ed5-4768-8626-be59a140b16f.png",
+      link: "/portfolio/cofounding/bloopa",
     },
     {
       id: 2,
-      title: "Mindful Productivity",
-      description: "A minimalist task management system designed to help users focus on what matters most without digital distractions.",
-      category: "Mobile App",
-      technologies: ["React Native", "TypeScript", "Firebase"],
+      title: "TechFamily",
+      description: "Our portfolio raised 1.5bn in follow-up funding. I did over a thousand deals. Helped startups across the globe go from an idea to something real. It was beautiful. And chaotic.",
       image: "/placeholder.svg",
-      link: "#",
+      link: "/portfolio/cofounding/techfamily",
+    }
+  ];
+
+  const angelInvestments = [
+    {
+      id: 1,
+      title: "Startup X",
+      description: "Building the next generation of AI tools for content creators and marketers.",
+      image: "/placeholder.svg",
+      link: "/portfolio/investments/startupx",
+    },
+    {
+      id: 2,
+      title: "DataSense",
+      description: "Making big data accessible and actionable for small businesses through intuitive visualization tools.",
+      image: "/placeholder.svg",
+      link: "/portfolio/investments/datasense",
     },
     {
       id: 3,
-      title: "Narrative Threads",
-      description: "A collaborative storytelling platform that weaves together contributions from multiple authors into cohesive narratives.",
-      category: "Web Application",
-      technologies: ["Next.js", "GraphQL", "MongoDB"],
+      title: "EcoTech",
+      description: "Sustainable technology solutions for reducing carbon footprint in urban environments.",
       image: "/placeholder.svg",
-      link: "#",
-    },
-    {
-      id: 4,
-      title: "Ambient Data",
-      description: "An experimental system that transforms data streams into subtle ambient visualizations for passive awareness.",
-      category: "Installation",
-      technologies: ["Processing", "Arduino", "Custom Hardware"],
-      image: "/placeholder.svg",
-      link: "#",
-    },
+      link: "/portfolio/investments/ecotech",
+    }
   ];
   
-  const filters = ['all', 'Web Application', 'Mobile App', 'Installation'];
-  
   const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+    ? [...coFoundingProjects, ...angelInvestments]
+    : activeFilter === 'Co-Founding' 
+      ? coFoundingProjects 
+      : angelInvestments;
 
   return (
     <div>
@@ -65,12 +71,12 @@ const Portfolio = () => {
           </motion.h1>
           
           <motion.p
-            className="text-center text-muted-foreground max-w-xl mx-auto"
+            className="text-center text-muted-foreground max-w-xl mx-auto font-mono"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Selected projects that showcase my approach to problem-solving and creation.
+            Selected ventures and investments that showcase my approach to building and supporting impactful projects.
           </motion.p>
           
           <motion.div 
@@ -89,7 +95,7 @@ const Portfolio = () => {
             {filters.map((filter) => (
               <button
                 key={filter}
-                className={`px-4 py-2 capitalize transition-colors duration-300 ${
+                className={`px-4 py-2 capitalize transition-colors duration-300 rounded-xl font-mono ${
                   activeFilter === filter 
                     ? 'bg-foreground text-background' 
                     : 'bg-secondary text-foreground hover:bg-foreground/20'
@@ -115,37 +121,43 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="overflow-hidden mb-4">
+                <div className="overflow-hidden mb-4 rounded-xl">
                   <img 
                     src={project.image} 
                     alt={project.title}
                     className="w-full aspect-video object-cover transform transition-transform duration-500 group-hover:scale-105" 
                   />
                 </div>
-                <span className="text-sm text-muted-foreground">{project.category}</span>
+                <span className="text-sm text-muted-foreground font-mono">
+                  {coFoundingProjects.some(p => p.id === project.id) ? "Co-Founding" : "Angel Investment"}
+                </span>
                 <h2 className="font-serif text-xl md:text-2xl mt-2 mb-3">{project.title}</h2>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span 
-                      key={tech} 
-                      className="text-xs px-2 py-1 bg-secondary text-muted-foreground rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <a 
-                  href={project.link} 
-                  className="animated-link"
-                  target="_blank"
-                  rel="noreferrer"
+                <p className="text-muted-foreground mb-4 font-mono">{project.description}</p>
+                <Link 
+                  to={project.link} 
+                  className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono mt-2 inline-flex"
                 >
-                  View Project
-                </a>
+                  Learn more <ArrowRight size={16} />
+                </Link>
               </motion.article>
             ))}
           </div>
+        </div>
+      </section>
+      
+      {/* Call to Action */}
+      <section className="py-16 bg-secondary/30 rounded-xl mx-8">
+        <div className="content-wrapper text-center">
+          <h2 className="font-serif text-2xl md:text-3xl mb-6">Let's Build Something Together</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-8 font-mono">
+            Whether you're looking for a co-founder, an investment, or just some advice, I'd love to hear from you.
+          </p>
+          <Link 
+            to="/contact" 
+            className="px-6 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors inline-block font-mono"
+          >
+            Get in Touch
+          </Link>
         </div>
       </section>
     </div>

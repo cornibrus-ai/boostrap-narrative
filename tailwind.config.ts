@@ -58,6 +58,18 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				pink: {
+					50: '#fff0fb',
+					100: '#ffe1f6',
+					200: '#ffc4ee',
+					300: '#ff95dd',
+					400: '#ff56c6',
+					500: '#ff29af',
+					600: '#ff0098',
+					700: '#d2007b',
+					800: '#b10067',
+					900: '#8a0053',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -72,7 +84,8 @@ export default {
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				xl: '15px', // Custom radius for our elements
 			},
 			keyframes: {
 				'accordion-down': {
@@ -98,6 +111,11 @@ export default {
 				'pulse-slow': {
 					'0%, 100%': { opacity: '0.6' },
 					'50%': { opacity: '0.8' }
+				},
+				'drift': {
+					'0%': { transform: 'translate(0px, 0px) rotate(0deg)' },
+					'50%': { transform: 'translate(5px, 10px) rotate(1deg)' },
+					'100%': { transform: 'translate(0px, 0px) rotate(0deg)' },
 				}
 			},
 			animation: {
@@ -106,6 +124,8 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'fade-out': 'fade-out 0.5s ease-out',
 				'float': 'float 6s ease-in-out infinite',
+				'drift': 'drift 10s ease-in-out infinite',
+				'drift-slow': 'drift 15s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 4s ease-in-out infinite'
 			}
 		}

@@ -13,6 +13,8 @@ import Now from "./pages/Now";
 import Reflections from "./pages/Reflections";
 import ReflectionDetail from "./pages/ReflectionDetail";
 import Portfolio from "./pages/Portfolio";
+import CoFoundingDetail from "./pages/CoFoundingDetail";
+import AngelInvestmentDetail from "./pages/AngelInvestmentDetail";
 import Contact from "./pages/Contact";
 import NotFoundCustom from "./pages/NotFoundCustom";
 
@@ -36,6 +38,8 @@ const App = () => (
               <Route path="/reflections" element={<Reflections />} />
               <Route path="/reflections/:slug" element={<ReflectionDetail />} />
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/portfolio/cofounding/:slug" element={<CoFoundingDetail />} />
+              <Route path="/portfolio/investments/:slug" element={<AngelInvestmentDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFoundCustom />} />
             </Routes>
