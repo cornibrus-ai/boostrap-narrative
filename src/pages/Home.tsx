@@ -1,8 +1,11 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Home = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +19,93 @@ const Home = () => {
       toast.error('Please enter your email address.');
     }
   };
+
+  // Best articles for carousel
+  const bestArticles = [
+    {
+      id: 1,
+      title: "The Space Between Thinking and Making",
+      excerpt: "Exploring the critical gap between ideation and execution, and how to navigate it effectively.",
+      date: "April 15, 2025",
+      category: "Process",
+      slug: "thinking-making-gap",
+    },
+    {
+      id: 2,
+      title: "Designing for Meaningful Engagement",
+      excerpt: "How can we create digital experiences that foster genuine connection instead of mindless consumption?",
+      date: "March 22, 2025",
+      category: "Design Philosophy",
+      slug: "meaningful-engagement",
+    },
+    {
+      id: 3,
+      title: "The Evolution of Creative Tools",
+      excerpt: "Reflecting on how the tools we use shape our thinking and the work we produce.",
+      date: "February 10, 2025",
+      category: "Technology",
+      slug: "creative-tools-evolution",
+    },
+    {
+      id: 4,
+      title: "Finding Clarity Through Constraints",
+      excerpt: "Why limitations might be the key to more focused and impactful creative work.",
+      date: "January 5, 2025",
+      category: "Creativity",
+      slug: "clarity-through-constraints",
+    },
+    {
+      id: 5,
+      title: "The Stablecoin Divide",
+      excerpt: "Why the US is unlocking crypto while Europe shuts it down.",
+      date: "April 6, 2025",
+      category: "Cryptocurrency",
+      slug: "stablecoin-divide",
+    }
+  ];
+  
+  // Angel investments data from portfolio
+  const angelInvestments = [
+    {
+      id: 1,
+      title: "Startup X",
+      description: "Building the next generation of AI tools for content creators and marketers.",
+      image: "/placeholder.svg",
+      link: "/portfolio/investments/startupx",
+    },
+    {
+      id: 2,
+      title: "DataSense",
+      description: "Making big data accessible and actionable for small businesses through intuitive visualization tools.",
+      image: "/placeholder.svg",
+      link: "/portfolio/investments/datasense",
+    },
+    {
+      id: 3,
+      title: "EcoTech",
+      description: "Sustainable technology solutions for reducing carbon footprint in urban environments.",
+      image: "/placeholder.svg",
+      link: "/portfolio/investments/ecotech",
+    }
+  ];
+  
+  // Co-founding projects
+  const coFoundingProjects = [
+    {
+      id: 1,
+      title: "Bloopa, Inc.",
+      description: "Welcome to 'The Bloops'—adorable characters who become wild with anger and cute with wholesome traits.",
+      image: "/lovable-uploads/cfc0945a-5ed5-4768-8626-be59a140b16f.png",
+      link: "/portfolio/cofounding/bloopa",
+    },
+    {
+      id: 2,
+      title: "TechFamily",
+      description: "Our portfolio raised 1.5bn in follow-up funding. I did over a thousand deals. Helped startups across the globe.",
+      image: "/placeholder.svg",
+      link: "/portfolio/cofounding/techfamily",
+    }
+  ];
 
   return (
     <div className="relative">
@@ -102,7 +192,7 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Off the Record Section Preview */}
+      {/* Off the Record Section - NEW CAROUSEL OF BEST ARTICLES */}
       <section className="py-16">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-6">
@@ -112,24 +202,47 @@ const Home = () => {
             </Link>
           </div>
           
-          <div className="space-y-4">
-            {[
-              { title: 'The Stablecoin Divide: Why the US is Unlocking Crypto While Europe Shuts It Down', date: '06 Apr' },
-              { title: 'Blockchain & IP', date: '03 Apr' },
-              { title: 'Price it bitch!', date: '15 Jan' }
-            ].map((post, index) => (
-              <div key={index} className="flex justify-between items-center border-b border-border/30 pb-3 group">
-                <Link to={`/reflections/${index}`} className="text-foreground hover:text-pink-300 font-mono">
-                  {post.title}
-                </Link>
-                <span className="text-muted-foreground text-sm font-mono">{post.date}</span>
-              </div>
-            ))}
-          </div>
+          <Carousel className="w-full">
+            <CarouselContent>
+              {bestArticles.map((article) => (
+                <CarouselItem key={article.id} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1">
+                    <div className="border border-border/50 p-6 rounded-xl hover:border-foreground/50 transition-all duration-300 h-full flex flex-col">
+                      <span className="text-sm text-muted-foreground">{article.category}</span>
+                      <h3 className="font-serif text-xl mt-2 mb-4">
+                        <Link to={`/reflections/${article.slug}`} className="animated-link">
+                          {article.title}
+                        </Link>
+                      </h3>
+                      <p className="text-muted-foreground mb-6 flex-grow">
+                        {article.excerpt}
+                      </p>
+                      <div className="flex justify-between items-center mt-auto">
+                        <span className="text-sm">{article.date}</span>
+                        <Link 
+                          to={`/reflections/${article.slug}`} 
+                          className="text-sm animated-link"
+                        >
+                          Read More
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-between items-center mt-8">
+              <CarouselPrevious className="relative inset-auto translate-y-0 hover:bg-foreground/10 border-border" />
+              <Link to="/reflections" className="text-pink-400 hover:text-pink-300 text-center font-mono">
+                Read more articles or reflections
+              </Link>
+              <CarouselNext className="relative inset-auto translate-y-0 hover:bg-foreground/10 border-border" />
+            </div>
+          </Carousel>
         </div>
       </section>
 
-      {/* Co-Founding Section Preview */}
+      {/* Co-Founding Section Preview - WITH HORIZONTAL SCROLL */}
       <section className="py-16">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-6">
@@ -139,19 +252,50 @@ const Home = () => {
             </Link>
           </div>
           
-          <div className="rounded-xl overflow-hidden border border-border/40">
-            <div className="p-6 space-y-4">
-              <h3 className="font-mono text-xl">Bloopa, Inc. ✨</h3>
-              <p className="text-muted-foreground font-mono text-sm">
-                Welcome to 'The Bloops'—adorable characters who become wild with anger and cute with wholesome traits. We're building an engaging IP through short, humorous social media clips that educate and inspire reflection.
-              </p>
-              <Link to="/portfolio/cofounding/bloopa" className="text-pink-400 hover:text-pink-300 inline-block font-mono text-sm">Learn more</Link>
+          <div className="overflow-x-auto pb-4 no-scrollbar">
+            <div className="flex gap-6 min-w-max">
+              {coFoundingProjects.map((project) => (
+                <div 
+                  key={project.id}
+                  className="w-[350px] rounded-xl border border-border/40 flex-shrink-0"
+                >
+                  <div className="h-40 w-full rounded-t-xl overflow-hidden">
+                    <div className="w-full h-full rounded-[15px] overflow-hidden relative">
+                      <motion.div 
+                        className="absolute inset-0"
+                        animate={{ 
+                          y: [0, -10, 0],
+                          opacity: [0.7, 1, 0.7]
+                        }}
+                        transition={{ 
+                          duration: 8, 
+                          repeat: Infinity, 
+                          repeatType: "reverse" 
+                        }}
+                      >
+                        <img 
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </motion.div>
+                    </div>
+                  </div>
+                  <div className="p-6 space-y-4">
+                    <h3 className="font-mono text-xl">{project.title}</h3>
+                    <p className="text-muted-foreground font-mono text-sm">
+                      {project.description}
+                    </p>
+                    <Link to={project.link} className="text-pink-400 hover:text-pink-300 inline-block font-mono text-sm">Learn more</Link>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
       
-      {/* Angel Investment Section Preview */}
+      {/* Angel Investment Section Preview - WITH HORIZONTAL SCROLL */}
       <section className="py-16">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-6">
@@ -161,14 +305,22 @@ const Home = () => {
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="bg-secondary/50 rounded-xl p-6 border border-border/30 hover:border-border/60 transition-colors">
-                <div className="w-10 h-10 bg-foreground/10 rounded-lg mb-4"></div>
-                <h3 className="font-mono text-lg mb-2">Investment {item}</h3>
-                <p className="text-muted-foreground text-sm font-mono">A brief description of this investment and what makes it special.</p>
-              </div>
-            ))}
+          <div className="overflow-x-auto pb-4 no-scrollbar">
+            <div className="flex gap-6 min-w-max">
+              {angelInvestments.map((investment) => (
+                <div 
+                  key={investment.id}
+                  className="bg-secondary/50 rounded-xl p-6 border border-border/30 hover:border-border/60 transition-colors w-[350px] flex-shrink-0"
+                >
+                  <div className="w-10 h-10 bg-foreground/10 rounded-lg mb-4"></div>
+                  <h3 className="font-mono text-lg mb-2">{investment.title}</h3>
+                  <p className="text-muted-foreground text-sm font-mono">{investment.description}</p>
+                  <Link to={investment.link} className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm mt-4">
+                    Learn more <ArrowRight size={16} />
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

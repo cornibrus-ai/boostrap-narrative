@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Now from "./pages/Now";
-import Reflections from "./pages/Reflections";
+import Reflections from "./pages/Reflections"; // This is now "Off the Record"
 import ReflectionDetail from "./pages/ReflectionDetail";
 import Portfolio from "./pages/Portfolio";
 import CoFoundingDetail from "./pages/CoFoundingDetail";
@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 import NotFoundCustom from "./pages/NotFoundCustom";
 import Manifesto from "./pages/Manifesto";
 import Advices from "./pages/Advices";
+import TravelInMyHead from "./pages/TravelInMyHead"; // New page
 
 // Layout
 import Layout from "./components/Layout";
@@ -45,6 +46,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/manifesto" element={<Manifesto />} />
               <Route path="/advices" element={<Advices />} />
+              <Route path="/travel-in-my-head" element={<TravelInMyHead />} />
               <Route path="*" element={<NotFoundCustom />} />
             </Routes>
           </AnimatePresence>

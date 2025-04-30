@@ -17,6 +17,7 @@ const Sidebar = () => {
     { name: 'Off The Record', path: '/reflections', icon: <BookOpen size={18} /> },
     { name: 'Advices', path: '/advices', icon: <BookOpen size={18} /> },
     { name: 'Manifesto of a serial looser', path: '/manifesto', icon: <Heart size={18} /> },
+    { name: 'A Travel In My Head', path: '/travel-in-my-head', icon: <BookOpen size={18} /> },
   ];
   
   const portfolioNav = [
@@ -84,8 +85,8 @@ const Sidebar = () => {
   );
   
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-secondary/30 backdrop-blur-lg border-r border-border/10 z-50 overflow-y-auto">
-      <div className="p-6">
+    <aside className="fixed left-0 top-0 bottom-0 w-72 bg-secondary/30 backdrop-blur-lg border-r border-border/10 z-50 overflow-hidden">
+      <div className="p-6 h-full overflow-y-auto no-scrollbar">
         <div className="font-serif text-xl mb-10">
           <Link to="/">The Woven Narrative</Link>
         </div>

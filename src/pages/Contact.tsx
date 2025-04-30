@@ -52,7 +52,7 @@ const Contact = () => {
         </div>
       </section>
       
-      {/* Contact Form Section - Replaced with simplified email form */}
+      {/* Contact Form Section - Using same email form as homepage */}
       <section className="py-16">
         <div className="content-wrapper">
           <div className="max-w-2xl mx-auto">

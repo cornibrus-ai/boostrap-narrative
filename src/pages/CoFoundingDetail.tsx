@@ -46,13 +46,13 @@ const CoFoundingDetail = () => {
       <div className="content-wrapper">
         <Link to="/portfolio" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
           <ArrowLeft size={16} />
-          <span className="font-mono">Back to Portfolio</span>
+          <span>Back to Portfolio</span>
         </Link>
         
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-3">
             <motion.h1 
-              className="text-3xl md:text-4xl lg:text-5xl mb-6 font-serif"
+              className="text-3xl md:text-4xl lg:text-5xl mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -62,7 +62,7 @@ const CoFoundingDetail = () => {
             
             <div className="prose prose-invert max-w-none">
               <motion.p 
-                className="text-xl text-muted-foreground mb-8 font-mono"
+                className="text-xl text-muted-foreground mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -77,36 +77,36 @@ const CoFoundingDetail = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <div>
-                  <h2 className="text-2xl mb-4 font-serif">My Role</h2>
+                  <h2 className="text-2xl mb-4">My Role</h2>
                   <div className="flex items-center gap-4 mb-2">
                     <div className="bg-secondary/50 px-4 py-2 rounded-xl">
-                      <span className="font-mono">{project.role}</span>
+                      <span>{project.role}</span>
                     </div>
                     <div className="bg-secondary/50 px-4 py-2 rounded-xl">
-                      <span className="font-mono">{project.period}</span>
+                      <span>{project.period}</span>
                     </div>
                   </div>
                 </div>
                 
                 <div>
-                  <h2 className="text-2xl mb-4 font-serif">Highlights</h2>
+                  <h2 className="text-2xl mb-4">Highlights</h2>
                   <ul className="space-y-2">
                     {project.details.map((detail, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <span className="text-pink-400 mt-1">•</span>
-                        <span className="font-mono">{detail}</span>
+                        <span>{detail}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
                 <div>
-                  <h2 className="text-2xl mb-4 font-serif">Visit</h2>
+                  <h2 className="text-2xl mb-4">Visit</h2>
                   <a 
                     href={project.website} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-pink-400 hover:text-pink-300 underline font-mono"
+                    className="text-pink-400 hover:text-pink-300 underline"
                   >
                     {project.website}
                   </a>
@@ -122,13 +122,12 @@ const CoFoundingDetail = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              {/* Replaced static image with rectangular animated frame */}
-              <div className="overflow-hidden rounded-[15px] mb-6 border border-white/20 aspect-[4/3] bg-secondary/30">
+              <div className="overflow-hidden rounded-[15px] mb-6 border border-white/20 relative">
                 <motion.div 
-                  className="w-full h-full"
+                  className="absolute inset-0"
                   animate={{ 
                     y: [0, -15, 0],
-                    opacity: [0.9, 1, 0.9]
+                    opacity: [0.7, 1, 0.7]
                   }}
                   transition={{ 
                     duration: 8, 
@@ -139,19 +138,19 @@ const CoFoundingDetail = () => {
                   <img 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover" 
+                    className="w-full object-cover" 
                   />
                 </motion.div>
               </div>
               
               <div className="bg-secondary/50 p-6 rounded-xl border border-border/30">
-                <h3 className="text-xl mb-4 font-serif">Interested in collaborating?</h3>
-                <p className="text-muted-foreground mb-6 font-mono">
+                <h3 className="text-xl mb-4">Interested in collaborating?</h3>
+                <p className="text-muted-foreground mb-6">
                   If you're interested in learning more about this project or discussing potential collaborations, I'd love to hear from you.
                 </p>
                 <Link 
                   to="/contact" 
-                  className="btn-primary inline-block font-mono rounded-xl"
+                  className="btn-primary inline-block"
                 >
                   Get in Touch
                 </Link>

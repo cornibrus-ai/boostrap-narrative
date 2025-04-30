@@ -109,7 +109,7 @@ const Portfolio = () => {
         </div>
       </section>
       
-      {/* Project Grid */}
+      {/* Project Grid - With rectangular frames instead of direct images */}
       <section className="pb-20">
         <div className="content-wrapper">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -121,12 +121,25 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="overflow-hidden mb-4 rounded-xl">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full aspect-video object-cover transform transition-transform duration-500 group-hover:scale-105" 
-                  />
+                <div className="overflow-hidden mb-4 rounded-[15px] border border-white/20 relative aspect-video bg-secondary/30">
+                  <motion.div 
+                    className="absolute inset-0"
+                    animate={{ 
+                      y: [0, -15, 0],
+                      opacity: [0.7, 1, 0.7]
+                    }}
+                    transition={{ 
+                      duration: 8, 
+                      repeat: Infinity, 
+                      repeatType: "reverse" 
+                    }}
+                  >
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover" 
+                    />
+                  </motion.div>
                 </div>
                 <span className="text-sm text-muted-foreground font-mono">
                   {coFoundingProjects.some(p => p.id === project.id) ? "Co-Founding" : "Angel Investment"}
