@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -20,10 +19,38 @@ const Home = () => {
 
   return (
     <div className="relative">
-      {/* Hero Section */}
+      {/* Hero Section with vertical frame instead of image */}
       <section className="min-h-[85vh] flex items-center justify-center relative">
-        <div className="content-wrapper grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="order-2 md:order-1">
+        <div className="content-wrapper grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+          <motion.div 
+            className="order-1 md:col-span-2 flex justify-center"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="w-full aspect-[2/3] rounded-[15px] border border-white/20 overflow-hidden relative bg-secondary/30 backdrop-blur-sm">
+              <motion.div 
+                className="absolute inset-0"
+                animate={{ 
+                  y: [0, -20, 0],
+                  opacity: [0.7, 1, 0.7]
+                }}
+                transition={{ 
+                  duration: 10, 
+                  repeat: Infinity, 
+                  repeatType: "reverse" 
+                }}
+              >
+                <img 
+                  src="/lovable-uploads/9a361404-83db-4f15-ae3e-90201c14d331.png" 
+                  alt="Vertical illustration" 
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <div className="order-2 md:col-span-3">
             <motion.h1 
               className="font-serif text-4xl md:text-6xl lg:text-7xl mb-6"
               initial={{ opacity: 0, y: 20 }}
@@ -68,19 +95,6 @@ const Home = () => {
               </p>
             </motion.div>
           </div>
-
-          <motion.div 
-            className="order-1 md:order-2 flex justify-center"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <img 
-              src="/lovable-uploads/1d6612ff-7604-49c8-a270-cf7fdbc1b2cd.png" 
-              alt="Vertical illustration" 
-              className="max-h-[500px] rounded-xl object-cover"
-            />
-          </motion.div>
         </div>
         
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer animate-pulse-slow">
@@ -129,7 +143,7 @@ const Home = () => {
             <div className="p-6 space-y-4">
               <h3 className="font-mono text-xl">Bloopa, Inc. ✨</h3>
               <p className="text-muted-foreground font-mono text-sm">
-                Welcome to "The Bloops"—adorable characters who become wild with anger and cute with wholesome traits. We're building an engaging IP through short, humorous social media clips that educate and inspire reflection.
+                Welcome to 'The Bloops'—adorable characters who become wild with anger and cute with wholesome traits. We're building an engaging IP through short, humorous social media clips that educate and inspire reflection.
               </p>
               <Link to="/portfolio/cofounding/bloopa" className="text-pink-400 hover:text-pink-300 inline-block font-mono text-sm">Learn more</Link>
             </div>
@@ -147,7 +161,7 @@ const Home = () => {
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[1, 2, 3].map((item) => (
               <div key={item} className="bg-secondary/50 rounded-xl p-6 border border-border/30 hover:border-border/60 transition-colors">
                 <div className="w-10 h-10 bg-foreground/10 rounded-lg mb-4"></div>
@@ -159,22 +173,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Call Me Section */}
-      <section className="py-16 bg-gradient-to-b from-background to-secondary/50">
-        <div className="content-wrapper text-center">
-          <h2 className="font-serif text-3xl md:text-4xl mb-6">Call Me!</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8 font-mono">
-            If you're working on something interesting or just want to connect, I'd love to hear from you.
-          </p>
-          <Link 
-            to="/contact" 
-            className="px-6 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors inline-block font-mono"
-          >
-            Get in Touch
-          </Link>
-        </div>
-      </section>
-      
       {/* Manifesto Section */}
       <section className="py-16">
         <div className="content-wrapper">
@@ -192,13 +190,29 @@ const Home = () => {
             </p>
             <div className="flex justify-center mt-8">
               <Link 
-                to="/about" 
+                to="/manifesto" 
                 className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono"
               >
                 Read the full manifesto <ArrowRight size={16} />
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+      
+      {/* Call Me Section */}
+      <section className="py-16 bg-gradient-to-b from-background to-secondary/50">
+        <div className="content-wrapper text-center">
+          <h2 className="font-serif text-3xl md:text-4xl mb-6">Call Me!</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-8 font-mono">
+            If you're working on something interesting or just want to connect, I'd love to hear from you.
+          </p>
+          <Link 
+            to="/contact" 
+            className="px-6 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors inline-block font-mono"
+          >
+            Get in Touch
+          </Link>
         </div>
       </section>
     </div>

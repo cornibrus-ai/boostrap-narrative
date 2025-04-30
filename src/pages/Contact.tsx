@@ -2,37 +2,22 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import { Phone, Youtube, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  const [email, setEmail] = useState('');
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-      setIsSubmitting(false);
-    }, 1500);
+    if (!email) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+    
+    toast.success("Message sent successfully! I'll get back to you soon.");
+    setEmail('');
   };
 
   return (
@@ -50,7 +35,7 @@ const Contact = () => {
           </motion.h1>
           
           <motion.p
-            className="text-center text-muted-foreground max-w-xl mx-auto"
+            className="text-center text-muted-foreground max-w-xl mx-auto font-mono"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -67,110 +52,76 @@ const Contact = () => {
         </div>
       </section>
       
-      {/* Contact Form */}
+      {/* Contact Form Section - Replaced with simplified email form */}
       <section className="py-16">
         <div className="content-wrapper">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <div>
-              <h2 className="font-serif text-2xl md:text-3xl mb-6">Get In Touch</h2>
-              <p className="text-muted-foreground mb-8">
-                I'm always interested in hearing about new projects, opportunities, or just 
-                connecting with like-minded individuals. Feel free to reach out using the form 
-                or through any of my social channels.
-              </p>
-              
-              <div className="space-y-6">
-                <div>
-                  <h3 className="font-serif text-lg mb-2">Email</h3>
-                  <a href="mailto:hello@example.com" className="text-muted-foreground hover:text-foreground transition-colors">
-                    hello@example.com
-                  </a>
-                </div>
-                
-                <div>
-                  <h3 className="font-serif text-lg mb-2">Social</h3>
-                  <div className="flex space-x-4">
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                      GitHub
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                      LinkedIn
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                      Twitter
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="max-w-2xl mx-auto">
+            <h2 className="font-serif text-2xl md:text-3xl mb-6 text-center">Get In Touch</h2>
+            <p className="text-muted-foreground mb-8 text-center font-mono">
+              I'm always interested in hearing about new projects, opportunities, or just 
+              connecting with like-minded individuals. Drop your email below and I'll get back to you.
+            </p>
             
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block mb-2">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-secondary border border-border px-4 py-2 focus:outline-none focus:border-foreground"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block mb-2">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-secondary border border-border px-4 py-2 focus:outline-none focus:border-foreground"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block mb-2">Subject</label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-secondary border border-border px-4 py-2 focus:outline-none focus:border-foreground"
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="Project Inquiry">Project Inquiry</option>
-                    <option value="Collaboration">Collaboration</option>
-                    <option value="Speaking Request">Speaking Request</option>
-                    <option value="Just Saying Hello">Just Saying Hello</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block mb-2">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="w-full bg-secondary border border-border px-4 py-2 focus:outline-none focus:border-foreground"
-                  ></textarea>
-                </div>
-                
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-16">
+              <div className="flex items-center gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full bg-secondary border border-border px-4 py-3 rounded-xl font-mono text-sm focus:outline-none focus:border-foreground"
+                />
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-foreground text-background hover:bg-foreground/80 transition-colors duration-300 disabled:opacity-50"
+                  className="px-6 py-3 bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300 rounded-xl font-mono whitespace-nowrap"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  Send
                 </button>
-              </form>
+              </div>
+            </form>
+          </div>
+          
+          {/* Connection options */}
+          <div className="max-w-2xl mx-auto">
+            <h2 className="font-serif text-2xl md:text-3xl mb-8 text-center">Other Ways to Connect</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a 
+                href="tel:+1234567890" 
+                className="flex flex-col items-center p-6 bg-secondary/50 rounded-xl border border-border/30 hover:border-border transition-all"
+              >
+                <Phone size={32} className="text-pink-400 mb-4" />
+                <h3 className="font-serif text-lg mb-2">Call Me!</h3>
+                <p className="text-muted-foreground text-sm font-mono text-center">
+                  Let's have a direct conversation
+                </p>
+              </a>
+              
+              <a 
+                href="https://youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center p-6 bg-secondary/50 rounded-xl border border-border/30 hover:border-border transition-all"
+              >
+                <Youtube size={32} className="text-pink-400 mb-4" />
+                <h3 className="font-serif text-lg mb-2">YouTube</h3>
+                <p className="text-muted-foreground text-sm font-mono text-center">
+                  Watch my latest videos
+                </p>
+              </a>
+              
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center p-6 bg-secondary/50 rounded-xl border border-border/30 hover:border-border transition-all"
+              >
+                <Linkedin size={32} className="text-pink-400 mb-4" />
+                <h3 className="font-serif text-lg mb-2">LinkedIn</h3>
+                <p className="text-muted-foreground text-sm font-mono text-center">
+                  Connect professionally
+                </p>
+              </a>
             </div>
           </div>
         </div>

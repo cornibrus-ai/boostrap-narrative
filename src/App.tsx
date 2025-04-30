@@ -17,6 +17,8 @@ import CoFoundingDetail from "./pages/CoFoundingDetail";
 import AngelInvestmentDetail from "./pages/AngelInvestmentDetail";
 import Contact from "./pages/Contact";
 import NotFoundCustom from "./pages/NotFoundCustom";
+import Manifesto from "./pages/Manifesto";
+import Advices from "./pages/Advices";
 
 // Layout
 import Layout from "./components/Layout";
@@ -41,6 +43,8 @@ const App = () => (
               <Route path="/portfolio/cofounding/:slug" element={<CoFoundingDetail />} />
               <Route path="/portfolio/investments/:slug" element={<AngelInvestmentDetail />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/manifesto" element={<Manifesto />} />
+              <Route path="/advices" element={<Advices />} />
               <Route path="*" element={<NotFoundCustom />} />
             </Routes>
           </AnimatePresence>
