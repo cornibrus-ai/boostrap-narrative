@@ -1,10 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, User, AlertTriangle, BookOpen, Briefcase, MessageSquare, Youtube, Linkedin, Phone, X, Heart } from 'lucide-react';
+import { Home, User, AlertTriangle, BookOpen, Briefcase, MessageSquare, Youtube, Linkedin, Phone, X, Heart, Menu } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Sidebar = () => {
   const location = useLocation();
+  const isMobile = useIsMobile();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   // Navigation groups
   const mainNav = [
@@ -60,6 +63,7 @@ const Sidebar = () => {
             to={item.path}
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-white/5
               ${isActive(item.path) ? 'text-foreground' : 'text-muted-foreground'}`}
+            onClick={() => isMobile && setIsMenuOpen(false)}
           >
             <span className="text-pink-400">{item.icon}</span>
             <span className="font-mono text-sm">{item.name}</span>
@@ -83,22 +87,48 @@ const Sidebar = () => {
       </ul>
     </div>
   );
+
+  const sidebarStyles = isMobile 
+    ? `fixed ${isMenuOpen ? 'left-0' : '-left-full'} top-0 bottom-0 w-[75%] max-w-56 bg-secondary/30 backdrop-blur-lg border-r border-border/10 z-50 overflow-hidden transition-all duration-300`
+    : 'fixed left-0 top-0 bottom-0 w-72 bg-secondary/30 backdrop-blur-lg border-r border-border/10 z-50 overflow-hidden';
   
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-72 bg-secondary/30 backdrop-blur-lg border-r border-border/10 z-50 overflow-hidden">
-      <div className="p-6 h-full overflow-y-auto no-scrollbar">
-        <div className="font-serif text-xl mb-10">
-          <Link to="/">The Woven Narrative</Link>
+    <>
+      {/* Mobile menu toggle */}
+      {isMobile && (
+        <div className="fixed top-4 left-4 z-50">
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+            className="p-2 rounded-full bg-secondary/50 backdrop-blur-lg"
+          >
+            <Menu size={24} />
+          </button>
         </div>
-        
-        <nav>
-          <NavGroup items={mainNav} />
-          <NavGroup title="Wisdom" items={wisdomNav} />
-          <NavGroup title="Portfolio" items={portfolioNav} />
-          <NavGroup title="Connect" items={connectNav} />
-        </nav>
-      </div>
-    </aside>
+      )}
+      
+      <aside className={sidebarStyles}>
+        <div className="p-6 h-full overflow-y-auto no-scrollbar">
+          <div className="font-serif text-xl mb-10">
+            <Link to="/" onClick={() => isMobile && setIsMenuOpen(false)}>Bootstrap Narrative</Link>
+          </div>
+          
+          <nav>
+            <NavGroup items={mainNav} />
+            <NavGroup title="Wisdom" items={wisdomNav} />
+            <NavGroup title="Portfolio" items={portfolioNav} />
+            <NavGroup title="Connect" items={connectNav} />
+          </nav>
+        </div>
+      </aside>
+      
+      {/* Overlay for mobile */}
+      {isMobile && isMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

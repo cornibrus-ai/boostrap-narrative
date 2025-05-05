@@ -41,7 +41,7 @@ const Navigation: React.FC = () => {
     >
       <div className="content-wrapper flex justify-between items-center">
         <div className="font-serif text-xl md:text-2xl">
-          <Link to="/" className="animated-link">The Woven Narrative</Link>
+          <Link to="/" className="animated-link">Bootstrap Narrative</Link>
         </div>
         
         <nav className="hidden md:block">

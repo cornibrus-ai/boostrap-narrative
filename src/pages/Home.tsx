@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { toast } from 'sonner';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
@@ -107,7 +108,7 @@ const Home = () => {
 
   return (
     <div className="relative">
-      {/* Hero Section with vertical frame instead of image */}
+      {/* Hero Section with empty frame instead of image */}
       <section className="min-h-[85vh] flex items-center justify-center relative">
         <div className="content-wrapper grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
           <motion.div 
@@ -117,13 +118,13 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="w-full aspect-[2/3] rounded-[15px] border border-white/20 overflow-hidden relative bg-secondary/30 backdrop-blur-sm">
-              {/* Empty frame - image removed as requested */}
+              {/* Empty frame for manual image addition */}
             </div>
           </motion.div>
 
           <div className="order-2 md:col-span-3">
             <motion.h1 
-              className="font-serif text-4xl md:text-6xl lg:text-7xl mb-6"
+              className="font-serif text-4xl md:text-6xl lg:text-7xl mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -132,7 +133,7 @@ const Home = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-10 font-mono"
+              className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-6 font-mono"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -174,12 +175,12 @@ const Home = () => {
       </section>
       
       {/* Off the Record Section - NEW CAROUSEL OF BEST ARTICLES */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <h2 className="section-title font-mono text-2xl">Off the Record</h2>
             <Link to="/reflections" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
-              View all <ArrowRight size={16} />
+              View all
             </Link>
           </div>
           
@@ -190,12 +191,12 @@ const Home = () => {
                   <div className="p-1">
                     <div className="border border-border/50 p-6 rounded-xl hover:border-foreground/50 transition-all duration-300 h-full flex flex-col">
                       <span className="text-sm text-muted-foreground">{article.category}</span>
-                      <h3 className="font-serif text-xl mt-2 mb-4">
+                      <h3 className="font-serif text-xl mt-2 mb-3">
                         <Link to={`/reflections/${article.slug}`} className="animated-link">
                           {article.title}
                         </Link>
                       </h3>
-                      <p className="text-muted-foreground mb-6 flex-grow">
+                      <p className="text-muted-foreground mb-4 flex-grow">
                         {article.excerpt}
                       </p>
                       <div className="flex justify-between items-center mt-auto">
@@ -212,7 +213,7 @@ const Home = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-between items-center mt-8">
+            <div className="flex justify-between items-center mt-6">
               <CarouselPrevious className="relative inset-auto translate-y-0 hover:bg-foreground/10 border-border" />
               <Link to="/reflections" className="text-pink-400 hover:text-pink-300 text-center font-mono">
                 Read more articles or reflections
@@ -224,12 +225,12 @@ const Home = () => {
       </section>
 
       {/* Co-Founding Section Preview - WITH HORIZONTAL SCROLL */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <h2 className="section-title font-mono text-2xl">Co-Founding</h2>
             <Link to="/portfolio/cofounding" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
-              View all <ArrowRight size={16} />
+              View all
             </Link>
           </div>
           
@@ -277,12 +278,12 @@ const Home = () => {
       </section>
       
       {/* Angel Investment Section Preview - WITH HORIZONTAL SCROLL */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <h2 className="section-title font-mono text-2xl">Angel Investments</h2>
             <Link to="/portfolio/investments" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
-              View all <ArrowRight size={16} />
+              View all
             </Link>
           </div>
           
@@ -297,7 +298,7 @@ const Home = () => {
                   <h3 className="font-mono text-lg mb-2">{investment.title}</h3>
                   <p className="text-muted-foreground text-sm font-mono">{investment.description}</p>
                   <Link to={investment.link} className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm mt-4">
-                    Learn more <ArrowRight size={16} />
+                    Learn more
                   </Link>
                 </div>
               ))}
@@ -307,45 +308,29 @@ const Home = () => {
       </section>
 
       {/* Manifesto Section */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
-          <h2 className="font-serif text-3xl md:text-4xl mb-6 text-center">Manifesto of a Serial Loser</h2>
+          <h2 className="font-serif text-3xl md:text-4xl mb-4 text-center">Manifesto of a Serial Loser</h2>
           <div className="max-w-3xl mx-auto">
-            <p className="text-muted-foreground mb-6 font-mono leading-relaxed">
+            <p className="text-muted-foreground mb-4 font-mono leading-relaxed">
               I've failed more times than I've succeeded. I've built products nobody wanted, 
               invested in ideas that didn't work, and spent years on projects that went nowhere. 
               But each failure taught me something valuable that the successes couldn't.
             </p>
-            <p className="text-muted-foreground mb-6 font-mono leading-relaxed">
+            <p className="text-muted-foreground mb-4 font-mono leading-relaxed">
               This isn't about glorifying failure—it's about recognizing that the path to 
               creating something meaningful is rarely a straight line. It's messy, uncertain, 
               and full of setbacks.
             </p>
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-6">
               <Link 
                 to="/manifesto" 
                 className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono"
               >
-                Read the full manifesto <ArrowRight size={16} />
+                Read the full manifesto
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-      
-      {/* Call Me Section */}
-      <section className="py-16 bg-gradient-to-b from-background to-secondary/50">
-        <div className="content-wrapper text-center">
-          <h2 className="font-serif text-3xl md:text-4xl mb-6">Call Me!</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8 font-mono">
-            If you're working on something interesting or just want to connect, I'd love to hear from you.
-          </p>
-          <Link 
-            to="/contact" 
-            className="px-6 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors inline-block font-mono"
-          >
-            Get in Touch
-          </Link>
         </div>
       </section>
     </div>
