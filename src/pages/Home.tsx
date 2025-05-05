@@ -68,7 +68,7 @@ const Home = () => {
   const angelInvestments = [
     {
       id: 1,
-      title: "Startup X",
+      title: "Startup TEST GITHUB",
       description: "Building the next generation of AI tools for content creators and marketers.",
       image: "/placeholder.svg",
       link: "/portfolio/investments/startupx",
