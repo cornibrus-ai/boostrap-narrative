@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowRight, ArrowLeft } from 'lucide-react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Home = () => {
   const [email, setEmail] = useState('');
@@ -119,24 +117,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="w-full aspect-[2/3] rounded-[15px] border border-white/20 overflow-hidden relative bg-secondary/30 backdrop-blur-sm">
-              <motion.div 
-                className="absolute inset-0"
-                animate={{ 
-                  y: [0, -20, 0],
-                  opacity: [0.7, 1, 0.7]
-                }}
-                transition={{ 
-                  duration: 10, 
-                  repeat: Infinity, 
-                  repeatType: "reverse" 
-                }}
-              >
-                <img 
-                  src="/lovable-uploads/9a361404-83db-4f15-ae3e-90201c14d331.png" 
-                  alt="Vertical illustration" 
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
+              {/* Empty frame - image removed as requested */}
             </div>
           </motion.div>
 

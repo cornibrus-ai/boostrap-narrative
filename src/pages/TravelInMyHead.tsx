@@ -66,7 +66,7 @@ const TravelInMyHead = () => {
             >
               <div className="absolute inset-0">
                 <img 
-                  src="/lovable-uploads/da4e5ffc-5eea-4390-9726-4710dfda2be4.png" 
+                  src="/lovable-uploads/3d7ee2bc-c57a-4947-ac5e-88d5343f9ac3.png" 
                   alt="Mind map visualization" 
                   className="w-full h-full object-contain p-4"
                 />

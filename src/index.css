@@ -128,4 +128,13 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+  
+  /* Mobile responsiveness helpers */
+  .mobile-container {
+    @apply w-full px-4;
+  }
+  
+  .desktop-pl-sidebar {
+    @apply pl-0 md:pl-72;
+  }
 }
