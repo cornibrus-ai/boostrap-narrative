@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
-import { Phone, Youtube, Linkedin } from 'lucide-react';
+import { Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Contact = () => {
@@ -26,7 +26,7 @@ const Contact = () => {
       <section className="min-h-[40vh] flex items-center justify-center relative">
         <div className="content-wrapper">
           <motion.h1 
-            className="font-serif text-3xl md:text-5xl lg:text-6xl mb-6 text-center"
+            className="font-morganite text-3xl md:text-5xl lg:text-6xl mb-3 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -44,7 +44,7 @@ const Contact = () => {
           </motion.p>
           
           <motion.div 
-            className="w-16 h-1 bg-foreground mx-auto my-10"
+            className="w-16 h-1 bg-foreground mx-auto my-6"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -53,16 +53,16 @@ const Contact = () => {
       </section>
       
       {/* Contact Form Section - Using same email form as homepage */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
           <div className="max-w-2xl mx-auto">
-            <h2 className="font-serif text-2xl md:text-3xl mb-6 text-center">Get In Touch</h2>
-            <p className="text-muted-foreground mb-8 text-center font-mono">
+            <h2 className="font-morganite text-2xl md:text-3xl mb-4 text-center">Get In Touch</h2>
+            <p className="text-muted-foreground mb-6 text-center font-mono">
               I'm always interested in hearing about new projects, opportunities, or just 
               connecting with like-minded individuals. Drop your email below and I'll get back to you.
             </p>
             
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-16">
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-12">
               <div className="flex items-center gap-2">
                 <input
                   type="email"
@@ -83,20 +83,9 @@ const Contact = () => {
           
           {/* Connection options */}
           <div className="max-w-2xl mx-auto">
-            <h2 className="font-serif text-2xl md:text-3xl mb-8 text-center">Other Ways to Connect</h2>
+            <h2 className="font-morganite text-2xl md:text-3xl mb-6 text-center">Other Ways to Connect</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <a 
-                href="tel:+1234567890" 
-                className="flex flex-col items-center p-6 bg-secondary/50 rounded-xl border border-border/30 hover:border-border transition-all"
-              >
-                <Phone size={32} className="text-pink-400 mb-4" />
-                <h3 className="font-serif text-lg mb-2">Call Me!</h3>
-                <p className="text-muted-foreground text-sm font-mono text-center">
-                  Let's have a direct conversation
-                </p>
-              </a>
-              
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <a 
                 href="https://youtube.com" 
                 target="_blank" 
@@ -104,7 +93,7 @@ const Contact = () => {
                 className="flex flex-col items-center p-6 bg-secondary/50 rounded-xl border border-border/30 hover:border-border transition-all"
               >
                 <Youtube size={32} className="text-pink-400 mb-4" />
-                <h3 className="font-serif text-lg mb-2">YouTube</h3>
+                <h3 className="font-morganite text-lg mb-2">YouTube</h3>
                 <p className="text-muted-foreground text-sm font-mono text-center">
                   Watch my latest videos
                 </p>
@@ -117,7 +106,7 @@ const Contact = () => {
                 className="flex flex-col items-center p-6 bg-secondary/50 rounded-xl border border-border/30 hover:border-border transition-all"
               >
                 <Linkedin size={32} className="text-pink-400 mb-4" />
-                <h3 className="font-serif text-lg mb-2">LinkedIn</h3>
+                <h3 className="font-morganite text-lg mb-2">LinkedIn</h3>
                 <p className="text-muted-foreground text-sm font-mono text-center">
                   Connect professionally
                 </p>

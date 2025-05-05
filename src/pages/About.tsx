@@ -9,7 +9,7 @@ const About = () => {
       <section className="min-h-[50vh] flex items-center justify-center relative">
         <div className="content-wrapper">
           <motion.h1 
-            className="font-serif text-3xl md:text-5xl lg:text-6xl mb-6 text-center"
+            className="font-morganite text-3xl md:text-5xl lg:text-6xl mb-3 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -18,7 +18,7 @@ const About = () => {
           </motion.h1>
           
           <motion.div 
-            className="w-16 h-1 bg-foreground mx-auto mb-10"
+            className="w-16 h-1 bg-foreground mx-auto mb-6"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -27,10 +27,10 @@ const About = () => {
       </section>
       
       {/* Background & Story */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
           <div className="max-w-3xl mx-auto">
-            <h2 className="section-title">My Background</h2>
+            <h2 className="font-morganite text-2xl md:text-3xl mb-4">My Background</h2>
             <div className="prose prose-invert max-w-none">
               <p className="text-lg mb-6">
                 I'm a multidisciplinary creator passionate about building meaningful experiences 
@@ -57,14 +57,14 @@ const About = () => {
       </section>
       
       {/* Values */}
-      <section className="py-16 bg-secondary">
+      <section className="py-12 bg-secondary">
         <div className="content-wrapper">
           <div className="max-w-3xl mx-auto">
-            <h2 className="section-title text-center mb-12">Core Values</h2>
+            <h2 className="font-morganite text-2xl md:text-3xl text-center mb-8">Core Values</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="p-6">
-                <h3 className="font-serif text-xl mb-3">Intentional Creation</h3>
+                <h3 className="font-morganite text-xl mb-3">Intentional Creation</h3>
                 <p className="text-muted-foreground">
                   I believe in creating with purpose, always questioning the "why" before the "how." 
                   Every project should solve a meaningful problem or enhance the human experience.
@@ -72,7 +72,7 @@ const About = () => {
               </div>
               
               <div className="p-6">
-                <h3 className="font-serif text-xl mb-3">Endless Curiosity</h3>
+                <h3 className="font-morganite text-xl mb-3">Endless Curiosity</h3>
                 <p className="text-muted-foreground">
                   I continuously explore new technologies, methodologies, and disciplines, 
                   recognizing that true innovation happens at the edges where fields intersect.
@@ -80,7 +80,7 @@ const About = () => {
               </div>
               
               <div className="p-6">
-                <h3 className="font-serif text-xl mb-3">Elegant Simplicity</h3>
+                <h3 className="font-morganite text-xl mb-3">Elegant Simplicity</h3>
                 <p className="text-muted-foreground">
                   I strive for solutions that are as simple as possible but no simpler. Complexity 
                   should exist in the thinking, not in the final experience.
@@ -88,7 +88,7 @@ const About = () => {
               </div>
               
               <div className="p-6">
-                <h3 className="font-serif text-xl mb-3">Deep Collaboration</h3>
+                <h3 className="font-morganite text-xl mb-3">Deep Collaboration</h3>
                 <p className="text-muted-foreground">
                   I thrive in environments where diverse perspectives come together. The most 
                   powerful ideas emerge when different viewpoints collide and connect.
@@ -100,10 +100,10 @@ const About = () => {
       </section>
       
       {/* Vision */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
           <div className="max-w-3xl mx-auto">
-            <h2 className="section-title">My Vision</h2>
+            <h2 className="font-morganite text-2xl md:text-3xl mb-4">My Vision</h2>
             <div className="prose prose-invert max-w-none">
               <p className="text-lg mb-6">
                 I envision a world where technology serves as a tool for human flourishing rather than 

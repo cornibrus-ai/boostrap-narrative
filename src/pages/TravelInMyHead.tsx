@@ -9,7 +9,7 @@ const TravelInMyHead = () => {
       <section className="min-h-[40vh] flex items-center justify-center relative">
         <div className="content-wrapper">
           <motion.h1 
-            className="font-serif text-3xl md:text-5xl lg:text-6xl mb-6 text-center"
+            className="font-morganite text-3xl md:text-5xl lg:text-6xl mb-3 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -27,7 +27,7 @@ const TravelInMyHead = () => {
           </motion.p>
           
           <motion.div 
-            className="w-16 h-1 bg-foreground mx-auto my-10"
+            className="w-16 h-1 bg-foreground mx-auto my-6"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -36,7 +36,7 @@ const TravelInMyHead = () => {
       </section>
       
       {/* Introduction */}
-      <section className="py-12">
+      <section className="py-8">
         <div className="content-wrapper">
           <div className="max-w-3xl mx-auto">
             <p className="text-muted-foreground mb-8 font-mono leading-relaxed">
@@ -45,7 +45,7 @@ const TravelInMyHead = () => {
               we actually think - with connections, references, and constant evolution.
             </p>
             
-            <p className="text-muted-foreground mb-12 font-mono leading-relaxed">
+            <p className="text-muted-foreground mb-8 font-mono leading-relaxed">
               Each node in this network represents a thought, concept, or idea that I'm exploring. The connections between them 
               show relationships, influences, and the paths my mind travels when contemplating complex topics. Feel free to 
               wander and discover unexpected connections.
@@ -64,11 +64,11 @@ const TravelInMyHead = () => {
               rel="noopener noreferrer"
               className="block w-full aspect-[4/3] rounded-[15px] border border-white/20 overflow-hidden relative bg-secondary/30 backdrop-blur-sm hover:border-pink-400/50 transition-all"
             >
-              <div className="absolute inset-0">
+              <div className="absolute inset-0 flex items-center justify-center p-3">
                 <img 
-                  src="/lovable-uploads/3d7ee2bc-c57a-4947-ac5e-88d5343f9ac3.png" 
+                  src="/lovable-uploads/fbe2596d-eae7-424b-ade1-84617f1be07a.png" 
                   alt="Mind map visualization" 
-                  className="w-full h-full object-contain p-4"
+                  className="w-auto h-auto max-w-[calc(100%+30px)] max-h-[calc(100%+30px)] object-contain brightness-110"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-70 flex items-end justify-center p-6">
@@ -82,10 +82,10 @@ const TravelInMyHead = () => {
       </section>
       
       {/* How to Use Section */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="content-wrapper">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-serif text-2xl md:text-3xl mb-6">How to Navigate</h2>
+            <h2 className="font-morganite text-2xl md:text-3xl mb-4">How to Navigate</h2>
             
             <div className="space-y-6 font-mono text-muted-foreground">
               <p>

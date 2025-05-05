@@ -23,6 +23,7 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 				serif: ['Playfair Display', 'serif'],
 				mono: ['Roboto Mono', 'monospace'],
+				morganite: ['Morganite', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

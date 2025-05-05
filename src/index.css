@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.cdnfonts.com/css/morganite');
 
 @tailwind base;
 @tailwind components;
@@ -59,7 +60,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-morganite font-bold;
   }
 }
 
@@ -85,7 +86,7 @@
   }
 
   .section-title {
-    @apply font-serif text-2xl md:text-3xl lg:text-4xl mb-4;
+    @apply font-morganite text-2xl md:text-3xl lg:text-4xl mb-4;
   }
   
   .section-content {
