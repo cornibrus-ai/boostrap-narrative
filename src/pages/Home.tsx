@@ -147,7 +147,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Often Wrong, Never Doubt
+              Often Wrong, Never DoubtTT
             </motion.h1>
             
             <motion.p 
