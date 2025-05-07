@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,6 +23,7 @@ export default {
 				serif: ['Playfair Display', 'serif'],
 				mono: ['Roboto Mono', 'monospace'],
 				morganite: ['Morganite', 'sans-serif'],
+				morena: ['Morena', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
