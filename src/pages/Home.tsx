@@ -123,7 +123,7 @@ const Home = () => {
 
           <div className="order-2 md:col-span-3">
             <motion.h1 
-              className="font-morganite text-4xl md:text-6xl lg:text-7xl mb-3"
+              className="font-morena text-4xl md:text-6xl lg:text-7xl mb-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -177,7 +177,7 @@ const Home = () => {
       <section className="py-12">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="section-title font-morganite text-2xl">Off the Record</h2>
+            <h2 className="section-title font-morena text-2xl">Off the Record</h2>
             <Link to="/reflections" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
               View all
             </Link>
@@ -190,7 +190,7 @@ const Home = () => {
                   <div className="p-1">
                     <div className="border border-border/50 p-6 rounded-xl hover:border-foreground/50 transition-all duration-300 h-full flex flex-col">
                       <span className="text-sm text-muted-foreground">{article.category}</span>
-                      <h3 className="font-morganite text-xl mt-2 mb-3">
+                      <h3 className="font-morena text-xl mt-2 mb-3">
                         <Link to={`/reflections/${article.slug}`} className="animated-link">
                           {article.title}
                         </Link>
@@ -227,7 +227,7 @@ const Home = () => {
       <section className="py-12">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="section-title font-morganite text-2xl">Co-Founding</h2>
+            <h2 className="section-title font-morena text-2xl">Co-Founding</h2>
             <Link to="/portfolio/cofounding" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
               View all
             </Link>
@@ -280,7 +280,7 @@ const Home = () => {
       <section className="py-12">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="section-title font-morganite text-2xl">Angel Investments</h2>
+            <h2 className="section-title font-morena text-2xl">Angel Investments</h2>
             <Link to="/portfolio/investments" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
               View all
             </Link>
@@ -309,7 +309,7 @@ const Home = () => {
       {/* Manifesto Section */}
       <section className="py-12">
         <div className="content-wrapper">
-          <h2 className="font-morganite text-3xl md:text-4xl mb-3 text-center">Manifesto of a Serial Loser</h2>
+          <h2 className="font-morena text-3xl md:text-4xl mb-3 text-center">Manifesto of a Serial Loser</h2>
           <div className="max-w-3xl mx-auto">
             <p className="text-muted-foreground mb-4 font-mono leading-relaxed">
               I've failed more times than I've succeeded. I've built products nobody wanted, 

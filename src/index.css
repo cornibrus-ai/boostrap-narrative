@@ -86,7 +86,7 @@
   }
 
   .section-title {
-    @apply font-morganite text-2xl md:text-3xl lg:text-4xl mb-4;
+    @apply font-morena text-2xl md:text-3xl lg:text-4xl mb-4;
   }
   
   .section-content {
