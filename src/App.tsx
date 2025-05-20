@@ -1,9 +1,8 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Pages
@@ -26,6 +25,30 @@ import Layout from "./components/Layout";
 
 const queryClient = new QueryClient();
 
+// Helper component to use useLocation for AnimatePresence key
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/now" element={<Now />} />
+        <Route path="/reflections" element={<Reflections />} />
+        <Route path="/reflections/:slug" element={<ReflectionDetail />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/portfolio/cofounding/:slug" element={<CoFoundingDetail />} />
+        <Route path="/portfolio/investments/:slug" element={<AngelInvestmentDetail />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/manifesto" element={<Manifesto />} />
+        <Route path="/advices" element={<Advices />} />
+        <Route path="/travel-in-my-head" element={<TravelInMyHead />} />
+        <Route path="*" element={<NotFoundCustom />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -33,23 +56,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Layout>
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/now" element={<Now />} />
-              <Route path="/reflections" element={<Reflections />} />
-              <Route path="/reflections/:slug" element={<ReflectionDetail />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/portfolio/cofounding/:slug" element={<CoFoundingDetail />} />
-              <Route path="/portfolio/investments/:slug" element={<AngelInvestmentDetail />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/manifesto" element={<Manifesto />} />
-              <Route path="/advices" element={<Advices />} />
-              <Route path="/travel-in-my-head" element={<TravelInMyHead />} />
-              <Route path="*" element={<NotFoundCustom />} />
-            </Routes>
-          </AnimatePresence>
+          <AnimatedRoutes />
         </Layout>
       </BrowserRouter>
     </TooltipProvider>

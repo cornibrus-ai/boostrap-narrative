@@ -79,7 +79,7 @@ const OffTheRecord = () => {
       <section className="min-h-[40vh] flex items-center justify-center relative">
         <div className="content-wrapper">
           <motion.h1 
-            className="font-morena text-3xl md:text-5xl lg:text-6xl mb-6 text-center"
+            className="font-display-alt text-3xl md:text-5xl lg:text-6xl mb-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -88,7 +88,7 @@ const OffTheRecord = () => {
           </motion.h1>
           
           <motion.p
-            className="text-center text-muted-foreground max-w-xl mx-auto"
+            className="text-center text-muted-foreground max-w-xl mx-auto font-mono"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -146,34 +146,8 @@ const OffTheRecord = () => {
         </div>
       </section>
       
-      {/* Newsletter Section - REUSING CONTACT FORM */}
-      <section className="py-16 bg-secondary">
-        <div className="content-wrapper">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-morena text-2xl md:text-3xl mb-4">Join the Conversation</h2>
-            <p className="text-muted-foreground mb-8">
-              Subscribe to receive new reflections directly in your inbox.
-            </p>
-            
-            <form className="flex flex-col md:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input 
-                type="email"
-                placeholder="Enter your email"
-                className="w-full bg-secondary border border-border px-4 py-3 rounded-xl font-mono text-sm focus:outline-none focus:border-foreground"
-              />
-              <button 
-                type="submit" 
-                className="px-6 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300 font-mono whitespace-nowrap"
-              >
-                Send
-              </button>
-            </form>
-            <p className="text-xs text-muted-foreground mt-4">
-              I respect your privacy. Unsubscribe at any time.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Newsletter Section - REMOVED as per request */}
+      
     </div>
   );
 };

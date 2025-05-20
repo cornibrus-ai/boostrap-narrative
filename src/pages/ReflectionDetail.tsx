@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -9,7 +10,7 @@ import {
   DiscussArticleButton,
   BackToTopButton,
   RateArticleButton
-} from '@/components/ArticleButtons'; // Assuming this is the path
+} from '@/components/ArticleButtons';
 
 const ReflectionDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -138,9 +139,10 @@ const ReflectionDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-morena mb-4">Reflection Not Found</h1>
-          <p className="text-muted-foreground mb-6">The reflection you're looking for doesn't exist or has been moved.</p>
-          <Link to="/reflections" className="animated-link">
+          {/* h1 will use font-display-alt from index.css */}
+          <h1 className="text-2xl mb-4">Reflection Not Found</h1>
+          <p className="text-muted-foreground mb-6 font-mono">The reflection you're looking for doesn't exist or has been moved.</p>
+          <Link to="/reflections" className="animated-link font-mono">
             <ArrowLeft className="inline-block mr-2" size={16} />
             Back to Reflections
           </Link>
@@ -154,24 +156,26 @@ const ReflectionDetail = () => {
       <article className="py-20">
         <div className="content-wrapper">
           <div className="max-w-2xl mx-auto">
-            <Link to="/reflections" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8">
+            <Link to="/reflections" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8 font-mono">
               <ArrowLeft className="mr-2" size={16} />
               All Reflections
             </Link>
             
-            <span className="text-sm text-muted-foreground">{post.category}</span>
+            <span className="text-sm text-muted-foreground font-mono">{post.category}</span>
             <div className="flex justify-between items-center mt-2 mb-1">
-              <h1 className="font-morena text-3xl md:text-4xl lg:text-5xl">
+              {/* h1 will use font-display-alt from index.css */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl"> 
                 {post.title}
               </h1>
               <ArticleAudioPlayer />
             </div>
             
-            <div className="flex items-center text-muted-foreground mb-8">
+            <div className="flex items-center text-muted-foreground mb-8 font-mono">
               <span>{post.date}</span>
             </div>
             
-            <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+            {/* The content from dangerouslySetInnerHTML will have its h2, h3 etc styled by index.css */}
+            <div className="prose prose-invert max-w-none font-mono" dangerouslySetInnerHTML={{ __html: post.content }} />
             
             <div className="mt-16 pt-8 border-t border-border/30">
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center mb-6">

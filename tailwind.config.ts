@@ -22,19 +22,21 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 				serif: ['Playfair Display', 'serif'],
 				mono: ['Roboto Mono', 'monospace'],
-				morganite: ['Morganite', 'sans-serif'],
-				morena: ['Morena', 'sans-serif'],
+				morganite: ['Morganite', 'sans-serif'], // Kept for now, can be removed if fully unused
+				morena: ['Morena', 'sans-serif'], // Kept for specific cases if any
+        'display-alt': ['"Alfa Slab One"', 'cursive'], // Using Alfa Slab One as Cooper Black alternative
 			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
-				background: 'hsl(var(--background))',
+				background: 'hsl(var(--background))', // Base, actual visual bg by GridBackground
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
+				// ... keep existing colors
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
@@ -109,15 +111,23 @@ export default {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-10px)' }
 				},
-				'pulse-slow': {
-					'0%, 100%': { opacity: '0.6' },
-					'50%': { opacity: '0.8' }
-				},
-				'drift': {
-					'0%': { transform: 'translate(0px, 0px) rotate(0deg)' },
-					'50%': { transform: 'translate(5px, 10px) rotate(1deg)' },
-					'100%': { transform: 'translate(0px, 0px) rotate(0deg)' },
-				}
+        'dynamic-object-move-1': {
+          '0%': { transform: 'translate(0, 0) rotate(0deg)', opacity: 0.7 },
+          '25%': { transform: 'translate(20vw, -30vh) rotate(45deg)', opacity: 1 },
+          '50%': { transform: 'translate(-10vw, 10vh) rotate(-30deg)', opacity: 0.8 },
+          '75%': { transform: 'translate(15vw, 20vh) rotate(15deg)', opacity: 1 },
+          '100%': { transform: 'translate(0, 0) rotate(0deg)', opacity: 0.7 },
+        },
+        'dynamic-object-move-2': {
+          '0%': { transform: 'translate(80vw, 70vh) rotate(0deg)', opacity: 0.6 },
+          '50%': { transform: 'translate(10vw, -20vh) rotate(180deg)', opacity: 1 },
+          '100%': { transform: 'translate(80vw, 70vh) rotate(360deg)', opacity: 0.6 },
+        },
+        'appear-disappear': {
+          '0%, 100%': { opacity: '0' },
+          '10%, 60%': { opacity: '1' }, // Visible for a period
+          '70%': { opacity: '0'}, // Start disappearing
+        }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -125,6 +135,9 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'fade-out': 'fade-out 0.5s ease-out',
 				'float': 'float 6s ease-in-out infinite',
+        'dynamic-object-1': 'dynamic-object-move-1 25s ease-in-out infinite, appear-disappear 28s linear infinite 3s',
+        'dynamic-object-2': 'dynamic-object-move-2 30s linear infinite, appear-disappear 33s linear infinite 1.5s',
+				// ... keep existing animations
 				'drift': 'drift 10s ease-in-out infinite',
 				'drift-slow': 'drift 15s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 4s ease-in-out infinite'

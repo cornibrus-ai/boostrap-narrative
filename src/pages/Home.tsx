@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const Home = () => {
   const [email, setEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
   
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      toast.success('Thank you for subscribing!');
-      setEmail('');
-    } else {
+    if (!email) {
       toast.error('Please enter your email address.');
+      return;
     }
+    setIsSubscribing(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    setIsSubscribing(false);
+    setSubscribed(true);
+    toast.success("Cool, you're one of our new contributors! You'll soon receive an email to celebrate your welcome :)", {
+      duration: 5000,
+    });
+    setEmail('');
+    setTimeout(() => setSubscribed(false), 3000); // Reset button state after a few seconds
   };
 
   // Best articles for carousel
@@ -107,9 +118,10 @@ const Home = () => {
 
   return (
     <div className="relative">
-      {/* Hero Section with empty frame instead of image */}
+      {/* Hero Section */}
       <section className="min-h-[85vh] flex items-center justify-center relative">
         <div className="content-wrapper grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+          {/* Empty frame for manual image addition */}
           <motion.div 
             className="order-1 md:col-span-2 flex justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -123,7 +135,7 @@ const Home = () => {
 
           <div className="order-2 md:col-span-3">
             <motion.h1 
-              className="font-morena text-4xl md:text-6xl lg:text-7xl mb-3"
+              className="font-display-alt text-4xl md:text-6xl lg:text-7xl mb-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -153,12 +165,18 @@ const Home = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email" 
                   className="bg-secondary border border-border px-4 py-3 rounded-xl flex-grow font-mono text-sm"
+                  disabled={isSubscribing || subscribed}
                 />
                 <button 
                   type="submit"
-                  className="px-6 py-3 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors"
+                  className={`px-6 py-3 rounded-xl transition-colors font-mono ${ 
+                    subscribed 
+                    ? 'bg-green-500 text-white cursor-default' 
+                    : 'bg-foreground text-background hover:bg-foreground/90'
+                  }`}
+                  disabled={isSubscribing || subscribed}
                 >
-                  Subscribe
+                  {isSubscribing ? 'Subscribing...' : subscribed ? <CheckCircle className="h-5 w-5 inline" /> : 'Subscribe'}
                 </button>
               </form>
               <p className="text-muted-foreground text-sm mt-2 font-mono">
@@ -173,11 +191,11 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Off the Record Section - NEW CAROUSEL OF BEST ARTICLES */}
+      {/* Off the Record Section */}
       <section className="py-12">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="section-title font-morena text-2xl">Off the Record</h2>
+            <h2 className="section-title font-display-alt text-2xl">Off the Record</h2>
             <Link to="/reflections" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
               View all
             </Link>
@@ -189,20 +207,20 @@ const Home = () => {
                 <CarouselItem key={article.id} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
                     <div className="border border-border/50 p-6 rounded-xl hover:border-foreground/50 transition-all duration-300 h-full flex flex-col">
-                      <span className="text-sm text-muted-foreground">{article.category}</span>
-                      <h3 className="font-morena text-xl mt-2 mb-3">
+                      <span className="text-sm text-muted-foreground font-mono">{article.category}</span>
+                      <h3 className="font-display-alt text-xl mt-2 mb-3">
                         <Link to={`/reflections/${article.slug}`} className="animated-link">
                           {article.title}
                         </Link>
                       </h3>
-                      <p className="text-muted-foreground mb-4 flex-grow">
+                      <p className="text-muted-foreground mb-4 flex-grow font-mono">
                         {article.excerpt}
                       </p>
                       <div className="flex justify-between items-center mt-auto">
-                        <span className="text-sm">{article.date}</span>
+                        <span className="text-sm font-mono">{article.date}</span>
                         <Link 
                           to={`/reflections/${article.slug}`} 
-                          className="text-sm animated-link"
+                          className="text-sm animated-link font-mono"
                         >
                           Read More
                         </Link>
@@ -223,11 +241,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Co-Founding Section Preview - WITH HORIZONTAL SCROLL */}
+      {/* Co-Founding Section Preview */}
       <section className="py-12">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="section-title font-morena text-2xl">Co-Founding</h2>
+            <h2 className="section-title font-display-alt text-2xl">Co-Founding</h2>
             <Link to="/portfolio/cofounding" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
               View all
             </Link>
@@ -263,7 +281,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="p-6 space-y-4">
-                    <h3 className="font-mono text-xl">{project.title}</h3>
+                    <h3 className="font-display-alt text-xl">{project.title}</h3>
                     <p className="text-muted-foreground font-mono text-sm">
                       {project.description}
                     </p>
@@ -276,11 +294,11 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Angel Investment Section Preview - WITH HORIZONTAL SCROLL */}
+      {/* Angel Investment Section Preview */}
       <section className="py-12">
         <div className="content-wrapper">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="section-title font-morena text-2xl">Angel Investments</h2>
+            <h2 className="section-title font-display-alt text-2xl">Angel Investments</h2>
             <Link to="/portfolio/investments" className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm">
               View all
             </Link>
@@ -294,7 +312,7 @@ const Home = () => {
                   className="bg-secondary/50 rounded-xl p-6 border border-border/30 hover:border-border/60 transition-colors w-[350px] flex-shrink-0"
                 >
                   <div className="w-10 h-10 bg-foreground/10 rounded-lg mb-4"></div>
-                  <h3 className="font-mono text-lg mb-2">{investment.title}</h3>
+                  <h3 className="font-display-alt text-lg mb-2">{investment.title}</h3>
                   <p className="text-muted-foreground text-sm font-mono">{investment.description}</p>
                   <Link to={investment.link} className="text-pink-400 hover:text-pink-300 flex items-center gap-1 font-mono text-sm mt-4">
                     Learn more
@@ -309,7 +327,7 @@ const Home = () => {
       {/* Manifesto Section */}
       <section className="py-12">
         <div className="content-wrapper">
-          <h2 className="font-morena text-3xl md:text-4xl mb-3 text-center">Manifesto of a Serial Loser</h2>
+          <h2 className="font-display-alt text-3xl md:text-4xl mb-3 text-center">Manifesto of a Serial Loser</h2>
           <div className="max-w-3xl mx-auto">
             <p className="text-muted-foreground mb-4 font-mono leading-relaxed">
               I've failed more times than I've succeeded. I've built products nobody wanted, 
