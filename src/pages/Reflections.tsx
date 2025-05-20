@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -80,7 +79,7 @@ const OffTheRecord = () => {
       <section className="min-h-[40vh] flex items-center justify-center relative">
         <div className="content-wrapper">
           <motion.h1 
-            className="font-serif text-3xl md:text-5xl lg:text-6xl mb-6 text-center"
+            className="font-morena text-3xl md:text-5xl lg:text-6xl mb-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -134,13 +133,10 @@ const OffTheRecord = () => {
             <div className="space-y-4">
               {filteredArticles.map((post) => (
                 <div key={post.id} className="flex justify-between items-center border-b border-border/30 pb-3 group">
-                  <Link to={`/reflections/${post.slug}`} className="text-foreground hover:text-pink-300 font-mono flex-grow">
+                  <Link to={`/reflections/${post.slug}`} className="text-foreground hover:text-pink-300 font-mono flex-grow mr-4">
                     {post.title}
                   </Link>
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs px-3 py-1 bg-secondary/50 rounded-full text-muted-foreground">
-                      {post.category}
-                    </span>
+                  <div className="flex items-center gap-4 flex-shrink-0">
                     <span className="text-muted-foreground text-sm font-mono">{post.date}</span>
                   </div>
                 </div>
@@ -154,7 +150,7 @@ const OffTheRecord = () => {
       <section className="py-16 bg-secondary">
         <div className="content-wrapper">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-2xl md:text-3xl mb-4">Join the Conversation</h2>
+            <h2 className="font-morena text-2xl md:text-3xl mb-4">Join the Conversation</h2>
             <p className="text-muted-foreground mb-8">
               Subscribe to receive new reflections directly in your inbox.
             </p>

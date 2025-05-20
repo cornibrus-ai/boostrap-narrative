@@ -1,7 +1,15 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import {
+  DownloadArticleButton,
+  ArticleAudioPlayer,
+  ShareArticleButton,
+  LikeArticleButton,
+  DiscussArticleButton,
+  BackToTopButton,
+  RateArticleButton
+} from '@/components/ArticleButtons'; // Assuming this is the path
 
 const ReflectionDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -130,7 +138,7 @@ const ReflectionDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-serif mb-4">Reflection Not Found</h1>
+          <h1 className="text-2xl font-morena mb-4">Reflection Not Found</h1>
           <p className="text-muted-foreground mb-6">The reflection you're looking for doesn't exist or has been moved.</p>
           <Link to="/reflections" className="animated-link">
             <ArrowLeft className="inline-block mr-2" size={16} />
@@ -142,47 +150,45 @@ const ReflectionDetail = () => {
   }
 
   return (
-    <article className="py-20">
-      <div className="content-wrapper">
-        <div className="max-w-2xl mx-auto">
-          <Link to="/reflections" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8">
-            <ArrowLeft className="mr-2" size={16} />
-            All Reflections
-          </Link>
-          
-          <span className="text-sm text-muted-foreground">{post.category}</span>
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl mt-2 mb-4">
-            {post.title}
-          </h1>
-          
-          <div className="flex items-center text-muted-foreground mb-8">
-            <span>{post.date}</span>
-          </div>
-          
-          <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
-          
-          <div className="mt-16 pt-8 border-t border-border/30">
-            <h3 className="font-serif text-xl mb-6">Continue the conversation</h3>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a 
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Reading "${post.title}" by @yourusername`)}&url=${encodeURIComponent(window.location.href)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 border border-foreground hover:bg-foreground hover:text-background transition-colors text-center"
-              >
-                Share on Twitter
-              </a>
-              <Link 
-                to="/contact"
-                className="px-6 py-3 border border-foreground hover:bg-foreground hover:text-background transition-colors text-center"
-              >
-                Discuss with Me
-              </Link>
+    <>
+      <article className="py-20">
+        <div className="content-wrapper">
+          <div className="max-w-2xl mx-auto">
+            <Link to="/reflections" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8">
+              <ArrowLeft className="mr-2" size={16} />
+              All Reflections
+            </Link>
+            
+            <span className="text-sm text-muted-foreground">{post.category}</span>
+            <div className="flex justify-between items-center mt-2 mb-1">
+              <h1 className="font-morena text-3xl md:text-4xl lg:text-5xl">
+                {post.title}
+              </h1>
+              <ArticleAudioPlayer />
+            </div>
+            
+            <div className="flex items-center text-muted-foreground mb-8">
+              <span>{post.date}</span>
+            </div>
+            
+            <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+            
+            <div className="mt-16 pt-8 border-t border-border/30">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center mb-6">
+                <DownloadArticleButton />
+                <LikeArticleButton />
+                <ShareArticleButton articleTitle={post.title} articleUrl={window.location.href} />
+                <DiscussArticleButton />
+              </div>
+              <div className="mt-8">
+                 <RateArticleButton />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+      <BackToTopButton />
+    </>
   );
 };
 
