@@ -22,21 +22,21 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 				serif: ['Playfair Display', 'serif'],
 				mono: ['Roboto Mono', 'monospace'],
-				morganite: ['Morganite', 'sans-serif'], // Kept for now, can be removed if fully unused
-				morena: ['Morena', 'sans-serif'], // Kept for specific cases if any
-        'display-alt': ['"Alfa Slab One"', 'cursive'], // Using Alfa Slab One as Cooper Black alternative
+				morganite: ['Morganite', 'sans-serif'],
+				morena: ['Morena', 'sans-serif'],
+        'display-alt': ['"Alfa Slab One"', 'cursive'],
+        'jura': ['Jura', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
-				background: 'hsl(var(--background))', // Base, actual visual bg by GridBackground
+				background: 'hsl(var(--background))', 
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
-				// ... keep existing colors
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
@@ -88,7 +88,7 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)',
-				xl: '15px', // Custom radius for our elements
+				xl: '15px',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -125,9 +125,13 @@ export default {
         },
         'appear-disappear': {
           '0%, 100%': { opacity: '0' },
-          '10%, 60%': { opacity: '1' }, // Visible for a period
-          '70%': { opacity: '0'}, // Start disappearing
-        }
+          '10%, 60%': { opacity: '1' }, 
+          '70%': { opacity: '0'}, 
+        },
+        'text-wave': {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(2px)' },
+        },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -137,10 +141,10 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
         'dynamic-object-1': 'dynamic-object-move-1 25s ease-in-out infinite, appear-disappear 28s linear infinite 3s',
         'dynamic-object-2': 'dynamic-object-move-2 30s linear infinite, appear-disappear 33s linear infinite 1.5s',
-				// ... keep existing animations
 				'drift': 'drift 10s ease-in-out infinite',
 				'drift-slow': 'drift 15s ease-in-out infinite',
-				'pulse-slow': 'pulse-slow 4s ease-in-out infinite'
+				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
+        'text-wave-animation': 'text-wave 2s ease-in-out infinite alternate',
 			}
 		}
 	},

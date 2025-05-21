@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:wght@300;400;500&family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;700&display=swap'); /* Added Jura font */
 @import url('https://fonts.cdnfonts.com/css/morganite'); /* This might be removed if Morganite is fully replaced */
 @import url('https://fonts.cdnfonts.com/css/morena');
 
@@ -63,19 +64,25 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    /* Apply 'Morena' first, then 'font-display-alt' (Alfa Slab One) as requested for titles. */
-    /* Or, if "Morena" was for specific titles and "Cooper Black" (Alfa Slab One) for others, this needs refinement. */
-    /* Assuming previous request for Morena is overridden by Cooper Black (Alfa Slab One) for all titles not mono */
-    @apply font-display-alt; /* Using Alfa Slab One as substitute for Cooper Black */
+    @apply font-jura font-bold relative; /* Changed to Jura, added bold and relative for pseudo-elements */
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2), 2px 2px 0px rgba(0,0,0,0.1); /* Subtle 3D depth */
+    animation: text-wave-animation 3s ease-in-out infinite alternate; /* Wave effect */
   }
+  /* Specific animated title for more pronounced wave if needed */
+  .title-animated {
+     @apply font-jura font-bold relative;
+     text-shadow: 1px 1px 0px rgba(0,0,0,0.2), 2px 2px 0px rgba(0,0,0,0.1);
+     animation: text-wave-animation 3s ease-in-out infinite alternate;
+  }
+
 
   /* Re-apply font-morena specifically where it was used if needed, otherwise font-display-alt takes precedence for titles */
   .font-morena { /* Keep this class if some titles specifically need Morena */
-    @apply font-morena;
+    @apply font-morena; /* This will now be overridden by h1-h6 styles unless !important is used or applied to non-header element */
   }
 }
 
-/* ... keep existing @layer components and @layer utilities */
+/* ... keep existing @layer components and @layer utilities ... */
 @layer components {
   .animated-link {
     @apply relative inline-block text-foreground transition-all duration-200;
@@ -98,8 +105,9 @@
   }
 
   .section-title {
-    /* Updated to use the new display font */
-    @apply font-display-alt text-2xl md:text-3xl lg:text-4xl mb-4;
+    @apply font-jura font-bold text-2xl md:text-3xl lg:text-4xl mb-4 relative; /* Changed to Jura */
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2), 2px 2px 0px rgba(0,0,0,0.1);
+    animation: text-wave-animation 3s ease-in-out infinite alternate;
   }
   
   .section-content {
@@ -129,6 +137,18 @@
   .btn-outline {
     @apply border border-foreground text-foreground hover:bg-foreground hover:text-background px-6 py-3 rounded-xl;
   }
+
+  /* Style for handmade dynamic objects */
+  .dynamic-object-handmade {
+    filter: url(#scribble); /* Apply SVG filter for scratchy effect - needs SVG filter defined */
+    /* Fallback or additional styling if SVG filter is complex to implement directly here */
+    border: 1px solid currentColor; /* Example border */
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Wobbly shape */
+    opacity: 0.7;
+  }
+   /* SVG filter for scribble effect - this should ideally be in the HTML or a separate SVG file if complex */
+  /* For simplicity in CSS, I'll focus on border-radius and opacity for "handmade" feel. True scratchiness is harder. */
+
 }
 
 @layer utilities {
@@ -152,3 +172,15 @@
     @apply pl-0 md:pl-72;
   }
 }
+
+/* Add SVG filter definition (simplified for brevity, a real one would be more complex) */
+/* This is often better placed in the HTML body or an SVG assets file */
+/*
+<svg width="0" height="0">
+  <filter id="scribble">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="turbulence"/>
+    <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="5"/>
+  </filter>
+</svg>
+*/
+
