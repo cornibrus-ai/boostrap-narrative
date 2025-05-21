@@ -1,16 +1,15 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import {
   DownloadArticleButton,
   ArticleAudioPlayer,
-  ShareArticleButton,
   LikeArticleButton,
   DiscussArticleButton,
   BackToTopButton,
   RateArticleButton
 } from '@/components/ArticleButtons';
+import SharePopover from '@/components/SharePopover';
 
 const ReflectionDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -162,16 +161,14 @@ const ReflectionDetail = () => {
             </Link>
             
             <span className="text-sm text-muted-foreground font-mono">{post.category}</span>
-            <div className="flex justify-between items-center mt-2 mb-1">
-              {/* h1 will use font-display-alt from index.css */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl"> 
-                {post.title}
-              </h1>
-              <ArticleAudioPlayer />
-            </div>
+            {/* h1 will use font-display-alt from index.css */}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl mt-2 mb-1"> 
+              {post.title}
+            </h1>
             
-            <div className="flex items-center text-muted-foreground mb-8 font-mono">
+            <div className="flex items-center justify-between text-muted-foreground mb-8 font-mono">
               <span>{post.date}</span>
+              <ArticleAudioPlayer articleTitle={post.title} />
             </div>
             
             {/* The content from dangerouslySetInnerHTML will have its h2, h3 etc styled by index.css */}
@@ -181,7 +178,8 @@ const ReflectionDetail = () => {
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center mb-6">
                 <DownloadArticleButton />
                 <LikeArticleButton />
-                <ShareArticleButton articleTitle={post.title} articleUrl={window.location.href} />
+                {/* Replace ShareArticleButton with SharePopover */}
+                <SharePopover articleTitle={post.title} articleUrl={window.location.href} />
                 <DiscussArticleButton />
               </div>
               <div className="mt-8">

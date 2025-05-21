@@ -1,13 +1,13 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, User, AlertTriangle, BookOpen, Briefcase, MessageSquare, Youtube, Linkedin, Phone, X, Heart, Menu } from 'lucide-react';
+import { Home, User, AlertTriangle, BookOpen, Briefcase, MessageSquare, Youtube, Linkedin, Phone, X, Heart, Menu, ExternalLink } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Sidebar = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const calendlyUrl = "https://calendly.com/stratadeus/audit";
   
   // Navigation groups
   const mainNav = [
@@ -32,10 +32,11 @@ const Sidebar = () => {
     { name: 'Youtube', path: 'https://youtube.com', icon: <Youtube size={18} />, external: true },
     { name: 'LinkedIn', path: 'https://linkedin.com', icon: <Linkedin size={18} />, external: true },
     { name: 'X', path: 'https://x.com', icon: <X size={18} />, external: true },
-    { name: 'Call Me!', path: '/contact', icon: <Phone size={18} /> },
+    { name: 'Call Me!', path: calendlyUrl, icon: <Phone size={18} />, external: true }, 
   ];
   
   const isActive = (path: string) => {
+    if (path.startsWith('http')) return false; 
     if (path === '/') {
       return location.pathname === '/';
     }
@@ -54,9 +55,11 @@ const Sidebar = () => {
             rel="noopener noreferrer"
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-white/5
               ${isActive(item.path) ? 'text-foreground' : 'text-muted-foreground'}`}
+            onClick={() => isMobile && setIsMenuOpen(false)}
           >
             <span className="text-pink-400">{item.icon}</span>
             <span className="font-mono text-sm">{item.name}</span>
+            <ExternalLink size={14} className="text-muted-foreground/70 ml-auto" />
           </a>
         ) : (
           <Link

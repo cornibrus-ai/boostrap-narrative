@@ -1,9 +1,14 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const INITIAL_ARTICLES_SHOWN = 3; // Number of articles to show initially
+const ARTICLES_TO_LOAD = 3; // Number of articles to load each time "see more" is clicked
+
 const OffTheRecord = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [visibleArticlesCount, setVisibleArticlesCount] = useState(INITIAL_ARTICLES_SHOWN);
   
   // All categories for filtering
   const categories = ['all', 'Grow Your Business', 'That\'s not investing', 'Advices', 'Visit my head'];
@@ -69,9 +74,20 @@ const OffTheRecord = () => {
   ];
 
   // Filter articles based on selected category
-  const filteredArticles = activeCategory === 'all' 
+  const allFilteredArticles = activeCategory === 'all' 
     ? reflections 
     : reflections.filter(article => article.category === activeCategory);
+
+  const articlesToShow = allFilteredArticles.slice(0, visibleArticlesCount);
+
+  const handleSeeMore = () => {
+    setVisibleArticlesCount(prevCount => Math.min(prevCount + ARTICLES_TO_LOAD, allFilteredArticles.length));
+  };
+  
+  // Reset visible count when category changes
+  React.useEffect(() => {
+    setVisibleArticlesCount(INITIAL_ARTICLES_SHOWN);
+  }, [activeCategory]);
 
   return (
     <div>
@@ -131,7 +147,7 @@ const OffTheRecord = () => {
         <div className="content-wrapper">
           <div className="max-w-4xl mx-auto">
             <div className="space-y-4">
-              {filteredArticles.map((post) => (
+              {articlesToShow.map((post) => (
                 <div key={post.id} className="flex justify-between items-center border-b border-border/30 pb-3 group">
                   <Link to={`/reflections/${post.slug}`} className="text-foreground hover:text-pink-300 font-mono flex-grow mr-4">
                     {post.title}
@@ -142,12 +158,19 @@ const OffTheRecord = () => {
                 </div>
               ))}
             </div>
+            {visibleArticlesCount < allFilteredArticles.length && (
+              <div className="mt-12 text-center">
+                <button
+                  onClick={handleSeeMore}
+                  className="font-mono text-pink-400 hover:text-pink-300 transition-colors"
+                >
+                  See More Abstract Facts ✨
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
-      
-      {/* Newsletter Section - REMOVED as per request */}
-      
     </div>
   );
 };

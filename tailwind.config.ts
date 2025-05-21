@@ -132,6 +132,11 @@ export default {
           '0%, 100%': { transform: 'translateX(0)' },
           '50%': { transform: 'translateX(2px)' },
         },
+        'ripple-pink': {
+          '0%': { opacity: '0.3', transform: 'scale(0.8)' },
+          '50%': { opacity: '0.7', transform: 'scale(1)' },
+          '100%': { opacity: '0.3', transform: 'scale(0.8)' },
+        },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -145,6 +150,7 @@ export default {
 				'drift-slow': 'drift 15s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
         'text-wave-animation': 'text-wave 2s ease-in-out infinite alternate',
+        'ripple-pink-animation': 'ripple-pink 1.5s infinite ease-out', // Added for BackToTopButton
 			}
 		}
 	},

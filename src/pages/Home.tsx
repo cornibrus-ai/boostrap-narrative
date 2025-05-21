@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowDown, CheckCircle } from 'lucide-react';
+import { ArrowDown, CheckCircle, ExternalLink } from 'lucide-react'; // Added ExternalLink
 import { toast } from 'sonner';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
@@ -22,11 +23,15 @@ const Home = () => {
 
     setIsSubscribing(false);
     setSubscribed(true);
-    toast.success("Cool, you're one of our new contributors! You'll soon receive an email to celebrate your welcome :)", {
-      duration: 5000,
-    });
+    // Updated toast message as per request (generic "here" without specific mailto)
+    toast.success(
+      "Cool, you're one of our new contributors! You'll soon receive an email to celebrate your welcome. You can check your inbox (including the spam folder).", 
+      { 
+        duration: 6000,
+      }
+    );
     setEmail('');
-    setTimeout(() => setSubscribed(false), 3000); // Reset button state after a few seconds
+    setTimeout(() => setSubscribed(false), 4000); 
   };
 
   // Best articles for carousel
@@ -128,7 +133,8 @@ const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="w-full aspect-[2/3] rounded-[15px] border border-white/20 overflow-hidden relative bg-secondary/30 backdrop-blur-sm">
+            {/* Changed aspect ratio from aspect-[2/3] to aspect-[4/5] */}
+            <div className="w-full aspect-[4/5] rounded-[15px] border border-white/20 overflow-hidden relative bg-secondary/30 backdrop-blur-sm">
               {/* Empty frame for manual image addition */}
             </div>
           </motion.div>
@@ -164,23 +170,25 @@ const Home = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email" 
-                  className="bg-secondary border border-border px-4 py-3 rounded-xl flex-grow font-mono text-sm"
+                  className="bg-secondary border border-border px-4 py-3 rounded-xl flex-grow font-mono text-sm focus:outline-none focus:border-foreground"
                   disabled={isSubscribing || subscribed}
                 />
                 <button 
                   type="submit"
-                  className={`px-6 py-3 rounded-xl transition-colors font-mono ${ 
+                  className={`px-6 py-3 rounded-xl transition-colors font-mono flex items-center justify-center ${ // Added flex for centering icon
                     subscribed 
                     ? 'bg-green-500 text-white cursor-default' 
                     : 'bg-foreground text-background hover:bg-foreground/90'
                   }`}
                   disabled={isSubscribing || subscribed}
+                  style={{ minWidth: '120px' }} // Ensure button width is somewhat consistent
                 >
-                  {isSubscribing ? 'Subscribing...' : subscribed ? <CheckCircle className="h-5 w-5 inline" /> : 'Subscribe'}
+                  {isSubscribing ? 'Subscribing...' : subscribed ? <CheckCircle className="h-5 w-5" /> : 'Subscribe'}
                 </button>
               </form>
+              {/* Updated text below subscribe form */}
               <p className="text-muted-foreground text-sm mt-2 font-mono">
-                Stay updated with my latest thoughts and projects.
+                I respect your privacy as much as your time. So, unsubscribe at any time 💡.
               </p>
             </motion.div>
           </div>

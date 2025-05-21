@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Download, PlayCircle, StopCircle, Share2, Heart, ArrowUpCircle, MessageSquare, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast'; // Corrected import path
+import DetailedAudioPlayerModal from './DetailedAudioPlayerModal'; // New Import
 
 interface ArticleButtonsProps {
   articleTitle: string;
@@ -52,47 +52,27 @@ export const DownloadArticleButton: React.FC = () => {
   );
 };
 
-export const ArticleAudioPlayer: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+export const ArticleAudioPlayer: React.FC<{ articleTitle: string }> = ({ articleTitle }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-    if (!isPlaying) {
-      console.log('Simulating audio playback start...');
-      toast({ title: "Audio Playing", description: "Article audio has started." });
-      // Placeholder for actual TTS API call
-    } else {
-      console.log('Simulating audio playback stop...');
-      toast({ title: "Audio Stopped", description: "Article audio has stopped." });
-      // Placeholder for stopping TTS
-    }
+    setIsModalOpen(true); // Open the modal
+    // Actual play logic would be handled within the modal or via a global audio player service
+    console.log('Opening detailed audio player modal...');
+    // toast({ title: "Audio Player", description: "Audio player modal opened." });
   };
 
   return (
-    <Button variant="ghost" size="icon" onClick={togglePlay} title={isPlaying ? "Stop audio" : "Play audio"}>
-      {isPlaying ? <StopCircle className="h-5 w-5 text-pink-400" /> : <PlayCircle className="h-5 w-5 text-foreground" />}
-    </Button>
-  );
-};
-
-export const ShareArticleButton: React.FC<ArticleButtonsProps> = ({ articleTitle, articleUrl }) => {
-  const handleShare = () => {
-    console.log(`Sharing article: ${articleTitle} at ${articleUrl}`);
-    // Basic share (e.g. Twitter intent)
-    const tweetText = encodeURIComponent(`Reading "${articleTitle}"`);
-    const tweetUrl = encodeURIComponent(articleUrl);
-    window.open(`https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`, '_blank', 'noopener,noreferrer');
-    toast({ title: "Share", description: "Opened Twitter to share the article." });
-  };
-  return (
-    <Button 
-      variant="outline" 
-      onClick={handleShare} 
-      className="bg-foreground text-background hover:bg-pink-400 hover:text-background px-5 py-2.5 text-xs" // Adjusted padding & font
-    >
-      <Share2 className="mr-2 h-4 w-4" />
-      Share Article
-    </Button>
+    <>
+      <Button variant="ghost" size="icon" onClick={togglePlay} title={"Play audio"}>
+        <PlayCircle className="h-5 w-5 text-foreground hover:text-pink-400" />
+      </Button>
+      <DetailedAudioPlayerModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        articleTitle={articleTitle} 
+      />
+    </>
   );
 };
 
@@ -128,12 +108,23 @@ export const DiscussArticleButton: React.FC = () => {
 
 export const BackToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  const toggleVisibility = () => {
+  const toggleVisibilityAndProgress = () => {
+    const scrolled = document.documentElement.scrollTop;
+    const maxHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
     if (window.pageYOffset > 300) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
+    }
+
+    if (maxHeight > 0) {
+      const progress = (scrolled / maxHeight) * 100;
+      setScrollProgress(Math.min(progress, 100)); // Cap at 100
+    } else {
+      setScrollProgress(0);
     }
   };
 
@@ -145,8 +136,8 @@ export const BackToTopButton: React.FC = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibilityAndProgress);
+    return () => window.removeEventListener('scroll', toggleVisibilityAndProgress);
   }, []);
 
   return (
@@ -156,10 +147,14 @@ export const BackToTopButton: React.FC = () => {
           variant="outline"
           size="icon"
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-foreground text-background border-background hover:bg-pink-400 hover:text-white p-3 rounded-full shadow-lg z-50"
-          style={{ padding: '15px' }} // Explicit padding to meet 15px requirement
+          className="fixed bottom-8 right-8 bg-foreground text-background border-2 border-pink-500 hover:bg-pink-400 hover:text-white rounded-full shadow-lg z-50 transition-all duration-300 ease-in-out"
+          style={{ padding: '15px', height: 'auto', width: 'auto', position: 'relative', overflow: 'hidden' }} 
         >
-          <ArrowUpCircle className="h-6 w-6" />
+          <div 
+            className="absolute bottom-0 left-0 right-0 bg-pink-500 transition-all duration-200 ease-linear"
+            style={{ height: `${scrollProgress}%`, animation: scrollProgress > 0 && scrollProgress < 100 ? 'ripple-pink 1.5s infinite ease-out' : 'none' }}
+          />
+          <ArrowUpCircle className="h-6 w-6 relative z-10" />
         </Button>
       )}
     </>
@@ -186,4 +181,3 @@ export const RateArticleButton: React.FC = () => {
     </Button>
   );
 };
-
